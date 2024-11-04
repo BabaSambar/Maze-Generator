@@ -26,6 +26,7 @@ void Renderer::drawMaze() {
         }
     }
     glFlush();
+
 }
 
 void Renderer::drawCell(int x, int y, bool isEntry, bool isExit) {
@@ -33,6 +34,9 @@ void Renderer::drawCell(int x, int y, bool isEntry, bool isExit) {
     float cellSize = 1.0f / maze.getWidth();
     float startX = x * cellSize;
     float startY = y * cellSize;
+
+    startX *= 100;
+    startY *= 100;
 
     if (isEntry) {
         glColor3f(0.0f, 1.0f, 0.0f);
@@ -48,21 +52,32 @@ void Renderer::drawCell(int x, int y, bool isEntry, bool isExit) {
     if (cell.rightWall) drawBresenhamLine(startX + cellSize, startY, startX + cellSize, startY + cellSize);
     if (cell.bottomWall) drawBresenhamLine(startX, startY, startX + cellSize, startY);
     if (cell.leftWall) drawBresenhamLine(startX, startY, startX, startY + cellSize);
+
+    std::cout << "Cell drawn at " << startX << ", " << startY << "\n";
 }
 
-void Renderer::drawBresenhamLine(float x1, float y1, float x2, float y2) {
-    int dx = std::abs(x2 - x1), dy = std::abs(y2 - y1);
-    int sx = x1 < x2 ? 1 : -1, sy = y1 < y2 ? 1 : -1;
-    int err = dx - dy;
+float roundFloat(float x)
+{
+    return (int)(x + 0.5);
+}
+
+void Renderer::drawBresenhamLine(int x1, int y1, int x2, int y2) {
+    int dx = x2 - x1, dy = y2 - y1, steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    int xinc = dx / (float)steps, yinc = dy / (float)steps;
+    float x = x1, y = y1;
 
     glBegin(GL_POINTS);
-    while (true) {
-        glVertex2f(x1, y1);
-        if (x1 == x2 && y1 == y2) break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; x1 += sx; }
-        if (e2 < dx) { err += dx; y1 += sy; }
+    glVertex2d(x1, y1);
+    for (int i = 0; i < steps; i++)
+    {
+        glVertex2d(roundFloat(x), roundFloat(y));
+        x += xinc;
+        y += yinc;
+        glEnd();
+        glFlush();
+        Sleep(5);
+        glBegin(GL_POINTS);
     }
     glEnd();
+    glFlush();
 }

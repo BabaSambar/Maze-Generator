@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\code.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeGenerator.cpp" />

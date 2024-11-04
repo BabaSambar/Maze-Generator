@@ -15,7 +15,7 @@ public:
 private:
     Maze& maze;
     void drawCell(int x, int y, bool isEntry, bool isExit);
-    void drawBresenhamLine(float x1, float y1, float x2, float y2);
+    void drawBresenhamLine(int x1, int y1, int x2, int y2);
 };
 
 #endif // RENDERER_H

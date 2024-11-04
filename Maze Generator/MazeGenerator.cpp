@@ -1,7 +1,7 @@
 #include "MazeGenerator.h"
-#include "MazeGenerator.h"
 #include <random>
 #include <vector>
+#include <iostream>
 #include <utility>
 
 void MazeGenerator::generateMaze(Maze& maze) {
@@ -63,4 +63,5 @@ void MazeGenerator::generateMaze(Maze& maze) {
             frontier.emplace_back(nx, ny);
         }
     }
+    std::cout << "Maze generated." << std::endl;
 }

@@ -27,6 +27,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\code.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\freeglut-MSVC-3.0.0-2.mp\freeglut\bin\freeglut.dll" />
