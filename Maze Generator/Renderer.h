@@ -7,6 +7,8 @@
 #include <freeglut.h>
 #include "Maze.h"
 
+using namespace std;
+
 class Renderer {
 public:
     Renderer(Maze& maze);

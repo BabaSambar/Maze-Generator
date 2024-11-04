@@ -2,6 +2,7 @@
 #define MAZEGENERATOR_H
 
 #include "Maze.h"
+using namespace std;
 
 class MazeGenerator {
 public:

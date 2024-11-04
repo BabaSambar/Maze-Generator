@@ -8,6 +8,8 @@
 #include <iostream>
 #include <freeglut.h>
 
+using namespace std;
+
 struct Cell {
     bool topWall = true;
     bool rightWall = true;
@@ -17,17 +19,17 @@ struct Cell {
 class Maze {
 public:
     Maze(int size) : size(size) {
-        grid.resize(size, std::vector<Cell>(size));
+        grid.resize(size, vector<Cell>(size));
         generateMaze(0, 0);
     }
 
     void generateMaze(int x, int y) {
         grid[x][y].visited = true;
 
-        std::vector<std::pair<int, int>> directions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::shuffle(directions.begin(), directions.end(), gen);
+        vector<pair<int, int>> directions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
+        random_device rd;
+        mt19937 gen(rd());
+        shuffle(directions.begin(), directions.end(), gen);
 
         for (const auto& direction : directions) {
             int dx = direction.first;
@@ -58,11 +60,11 @@ public:
     }
 
     int getSize() const { return size; }
-    const std::vector<std::vector<Cell>>& getGrid() const { return grid; }
+    const vector<vector<Cell>>& getGrid() const { return grid; }
 
 private:
     int size;
-    std::vector<std::vector<Cell>> grid;
+    vector<vector<Cell>> grid;
 };
 
 class Game {
@@ -70,7 +72,7 @@ public:
     enum class GameState { START, PLAY, END };
 
     Game() : maze(10), playerX(0), playerY(0), state(GameState::START) {
-        std::cout << "Press ENTER to start the game!" << std::endl;
+        cout << "Press ENTER to start the game!" << endl;
     }
 
     void draw() {
@@ -96,7 +98,7 @@ public:
         if (state == GameState::START && (key == 13)) { // ENTER key
             state = GameState::PLAY;
             playerX = playerY = 0;
-            std::cout << "Game started! Use WASD to move, R to reset, ESC to exit" << std::endl;
+            cout << "Game started! Use WASD to move, R to reset, ESC to exit" << endl;
         }
         else if (state == GameState::PLAY) {
             int dx = 0, dy = 0;
@@ -118,11 +120,11 @@ public:
                 if (maze.canMove(playerX, playerY, dx, dy)) {
                     playerX += dx;
                     playerY += dy;
-                    std::cout << "Player moved to position (" << playerX << "," << playerY << ")" << std::endl;
+                    cout << "Player moved to position (" << playerX << "," << playerY << ")" << endl;
 
                     if (playerX == maze.getSize() - 1 && playerY == maze.getSize() - 1) {
                         state = GameState::END;
-                        std::cout << "Congratulations! You reached the goal!" << std::endl;
+                        cout << "Congratulations! You reached the goal!" << endl;
                     }
                 }
             }
@@ -143,7 +145,7 @@ private:
         maze = Maze(10);
         playerX = playerY = 0;
         state = GameState::PLAY;
-        std::cout << "Game reset!" << std::endl;
+        cout << "Game reset!" << endl;
     }
 
     void drawMaze() {

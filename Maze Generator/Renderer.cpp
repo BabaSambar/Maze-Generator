@@ -9,11 +9,11 @@ void Renderer::drawMaze() {
     int height = maze.getHeight();
 
     // Get entry and exit points
-    std::pair<int, int> entry = maze.getEntry();
+    pair<int, int> entry = maze.getEntry();
     int entryX = entry.first;
     int entryY = entry.second;
 
-    std::pair<int, int> exit = maze.getExit();
+    pair<int, int> exit = maze.getExit();
     int exitX = exit.first;
     int exitY = exit.second;
 
@@ -53,7 +53,7 @@ void Renderer::drawCell(int x, int y, bool isEntry, bool isExit) {
     if (cell.bottomWall) drawBresenhamLine(startX, startY, startX + cellSize, startY);
     if (cell.leftWall) drawBresenhamLine(startX, startY, startX, startY + cellSize);
 
-    std::cout << "Cell drawn at " << startX << ", " << startY << "\n";
+    cout << "Cell drawn at " << startX << ", " << startY << "\n";
 }
 
 float roundFloat(float x)

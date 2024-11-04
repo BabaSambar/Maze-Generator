@@ -8,23 +8,23 @@ void MazeGenerator::generateMaze(Maze& maze) {
     int width = maze.getWidth();
     int height = maze.getHeight();
 
-    std::vector<std::pair<int, int>> frontier;
+    vector<pair<int, int>> frontier;
     frontier.emplace_back(0, 0);
     maze.getCell(0, 0).visited = true;
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    random_device rd;
+    mt19937 gen(rd());
 
     while (!frontier.empty()) {
-        std::uniform_int_distribution<> dist(0, frontier.size() - 1);
-        std::pair<int, int> current = frontier[dist(gen)];
+        uniform_int_distribution<> dist(0, frontier.size() - 1);
+        pair<int, int> current = frontier[dist(gen)];
         int x = current.first;
         int y = current.second;
         frontier.erase(frontier.begin() + dist(gen));
 
-        static const std::vector<std::pair<int, int>> directions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
+        static const vector<pair<int, int>> directions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
 
-        std::vector<std::pair<int, int>> neighbors;
+        vector<pair<int, int>> neighbors;
         for (const auto& direction : directions) {
             int dx = direction.first;
             int dy = direction.second;
@@ -37,8 +37,8 @@ void MazeGenerator::generateMaze(Maze& maze) {
         }
 
         if (!neighbors.empty()) {
-            std::uniform_int_distribution<> neighborDist(0, neighbors.size() - 1);
-            std::pair<int, int> neighbor = neighbors[neighborDist(gen)];
+            uniform_int_distribution<> neighborDist(0, neighbors.size() - 1);
+            pair<int, int> neighbor = neighbors[neighborDist(gen)];
             int nx = neighbor.first;
             int ny = neighbor.second;
 
@@ -63,5 +63,5 @@ void MazeGenerator::generateMaze(Maze& maze) {
             frontier.emplace_back(nx, ny);
         }
     }
-    std::cout << "Maze generated." << std::endl;
+    cout << "Maze generated." << endl;
 }

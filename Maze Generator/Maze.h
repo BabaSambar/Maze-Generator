@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Cell.h"
+using namespace std;
 
 class Maze {
 public:
@@ -11,12 +12,12 @@ public:
     int getWidth() const { return width; }
     int getHeight() const { return height; }
 
-    std::pair<int, int> getEntry() const { return { 0, 0 }; }
-    std::pair<int, int> getExit() const { return { width - 1, height - 1 }; }
+    pair<int, int> getEntry() const { return { 0, 0 }; }
+    pair<int, int> getExit() const { return { width - 1, height - 1 }; }
 
 private:
     int width, height;
-    std::vector<std::vector<Cell>> grid;
+    vector<vector<Cell>> grid;
 };
 
 #endif // MAZE_H
